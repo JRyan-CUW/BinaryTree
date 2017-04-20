@@ -81,7 +81,7 @@ package com.example.jacobryan.binarytree;
             {
                 return "Right";
             }
-            else if(leftDepth > rightDepth && isOutOfBalance()
+            else if(leftDepth > rightDepth && isOutOfBalance())
             {
                 return "Left";
             }

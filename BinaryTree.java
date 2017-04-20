@@ -77,11 +77,11 @@ package com.example.jacobryan.binarytree;
                 rightDepth = this.rightTree.getDepth();
             }
 
-            if(rightDepth > leftDepth && isOutOfBalance() == true)
+            if(rightDepth > leftDepth && isOutOfBalance())
             {
                 return "Right";
             }
-            else if(leftDepth > rightDepth && isOutOfBalance() == true)
+            else if(leftDepth > rightDepth && isOutOfBalance()
             {
                 return "Left";
             }

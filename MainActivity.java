@@ -1,29 +1,46 @@
 package com.example.jacobryan.binarytree;
 
-import android.renderscript.Int2;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
-
-    private EditText ed;
+    private EditText inputET;
+    private ViewGroup theTree;
     private BinaryTree bt;
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        this.inputET = (EditText)this.findViewById(R.id.inputET);
+        this.theTree = (ViewGroup)this.findViewById(R.id.theTree);
 
-        this.ed = (EditText)this.findViewById(R.id.inputEd);
+        //6, 5, 4, 7, 5, 3, 7,5
+        this.bt = new BinaryTree(this.theTree, this);
     }
 
-    public void addTreeButtonClicked (View v)
+    public void addButtonPressed(View v) {
+        this.bt.add(Integer.parseInt(this.inputET.getText().toString()));
+    }
+
+    public void inOrderTraverseButtonPressed(View v)
     {
-        String st = ed.getText().toString();
-        int in = Integer.parseInt(st);
-        Node node = new Node(in);
-        bt.add(node);
+        Core.theQ.clear();
+        this.bt.visitInOrder();
+        for(String s : Core.theQ)
+        {
+            System.out.print(s + ",");
+        }
+        System.out.println("");
+    }
+
+    public void getDepthButtonPressed(View v)
+    {
+        System.out.println("Depth: " + this.bt.getDepth());
     }
 }

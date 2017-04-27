@@ -22,6 +22,9 @@ package com.example.jacobryan.binarytree;
         private BinaryTree leftTree;
         private BinaryTree rightTree;
 
+        //Added for HW 15**********************************
+        private BinaryTree parent;
+
         public BinaryTree(ViewGroup theTreeView, Context context)
         {
             this.theTreeView = theTreeView;
@@ -31,6 +34,7 @@ package com.example.jacobryan.binarytree;
             this.leftTree = null;
             this.rightTree = null;
             this.context = context;
+            this.parent = null;
         }
 
         public BinaryTree(int payload, int depth, char position, ViewGroup theTreeView, Context context)
@@ -40,6 +44,20 @@ package com.example.jacobryan.binarytree;
             this.depth = depth;
             this.position = position;
             this.isSet = true;
+        }
+
+        //Added for HW 15*********************************************
+        public String locationToParent()
+        {
+            if(this.parent.rightTree == this)
+            {
+                return "right";
+            }
+            else if(this.parent.leftTree == this)
+            {
+                return "left";
+            }
+            return "root";
         }
 
         public boolean isOutOfBalance()
@@ -55,15 +73,23 @@ package com.example.jacobryan.binarytree;
                 rightDepth = this.rightTree.getDepth();
             }
 
+
+            //Added for HW 15
             int difference = Math.abs(leftDepth - rightDepth);
-            return difference > 1;
+            if(difference > 1)
+            {
+                System.out.println(outOfBalanceSide());
+                return true;
+            }
+            return false;
+            //*******************************************
+
+
+
+
+
         }
 
-
-
-
-
-        //Homework #14 ***************************************************************
         public String outOfBalanceSide()
         {
             int leftDepth = 0;
@@ -90,10 +116,6 @@ package com.example.jacobryan.binarytree;
                 return "Balanced";
             }
         }
-        //Homework #14 ***************************************************************
-
-
-
 
 
         public int getDepth()
